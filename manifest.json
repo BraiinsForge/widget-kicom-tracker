@@ -1,0 +1,60 @@
+{
+  "uid": "0ca26df2-ec61-462f-839c-7e20a44e37bb",
+  "version": "0.1.16",
+  "name": "Kicom Tracker v0.1.16",
+  "description": "Aktuální Kicomovy sázky a nedávné výsledky z AOX.cz.",
+  "binary": "bin/kicom-tracker",
+  "icon": "assets/icon.svg",
+  "category": "utility",
+  "supported_viewports": [
+    {
+      "type": "rectangular",
+      "min_width": 317,
+      "max_width": 1280,
+      "min_height": 238,
+      "max_height": 480
+    }
+  ],
+  "config_help": "Sázky se načítají z AOX.cz. Uplynutí termínu samo neurčuje výsledek. Pokud zdroj neuvádí datum uzavření, doba zobrazení běží od prvního zjištění výsledku a přežije restart. Již známé historické výsledky se znovu neoznamují.",
+  "params": {
+    "retention_days": {
+      "name": "Zobrazovat ukončené sázky (dny)",
+      "description": "Po této době výsledek zmizí. Nula skryje všechny ukončené sázky.",
+      "type": "integer",
+      "min": 0,
+      "max": 30,
+      "default_value": 3
+    },
+    "refresh_minutes": {
+      "name": "Interval aktualizace (minuty)",
+      "type": "integer",
+      "default_value": 15,
+      "enum_values": [
+        {
+          "value": 5,
+          "label": "5 minut"
+        },
+        {
+          "value": 15,
+          "label": "15 minut"
+        },
+        {
+          "value": 30,
+          "label": "30 minut"
+        },
+        {
+          "value": 60,
+          "label": "60 minut"
+        }
+      ]
+    },
+    "rotation_seconds": {
+      "name": "Střídání sázek (sekundy)",
+      "description": "Doba zobrazení jedné sázky. Předchozí a další lze zvolit tlačítky na obrazovce.",
+      "type": "integer",
+      "min": 5,
+      "max": 120,
+      "default_value": 15
+    }
+  }
+}
