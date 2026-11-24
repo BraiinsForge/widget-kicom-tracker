@@ -6,6 +6,8 @@
 - Build with `nix build` or `./scripts/build.sh`; check with `nix flake check` or `./scripts/check.sh`.
 - `scripts/package.py` is the one packaging path for both. It follows upstream's
   `docs/uploading-wasm-widgets.md` and uses the launcher template verbatim.
+- `scripts/publish-index.sh` turns the packaged NAR into a package server: index, narinfo and
+  `nix-cache-info` beside it. The store path is content-addressed, so the narinfo carries no signature.
 - Always include the release version in the widget's display name. Increase the version for every
   delivered update while keeping its UID stable.
 - The `nix build` captures render the packaged widget through software GL. They do not verify GPU

@@ -34,6 +34,20 @@ Rotation and data:
 - release: the `.nar` from the [`latest` release](../../releases/tag/latest), rebuilt from every `master` commit
 - branch or pull request: the `kicom-tracker` artifact of its run on the [Actions](../../actions) page
 - on the Deck: **Display Widgets → Install Widget**, then pick the file
+- package server: the `latest` release is also a package index and Nix binary cache.
+  As root on the Deck, register it once; the widget then appears among the installable widgets,
+  and upgrades come with each release:
+
+  ```sh
+  base=https://github.com/BraiinsForge/widget-kicom-tracker/releases/download/latest
+  key=downloads.braiinsforge.com-1:4XDOIc61MHtHeIOVrgNOfgzZHt4RCPfqWGDt5PwsLeU=
+  bmc-nix-cli register-server --id kicom-tracker --optional \
+    --index-url $base/nix-package-index.v1.json --index-public-key $key \
+    --cache-url $base --cache-public-key $key
+  ```
+
+  The store path is content-addressed, so Nix checks it against its own hash and needs no key.
+  The command requires one with `--cache-url`; the Deck's own key adds no trust.
 
 ## Build
 
