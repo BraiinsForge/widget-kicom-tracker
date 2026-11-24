@@ -1,5 +1,6 @@
 { lib
 , stdenv
+, runCommand
 , makeRustPlatform
 , mkShell
 , ii
@@ -8,6 +9,7 @@
 , git
 , src
 , bmc-main
+, wasm-capture
 }:
 let
   name = "kicom-tracker";
@@ -63,9 +65,19 @@ let
     '';
     installPhase = "";
   };
+
+  captures = runCommand "${name}-captures" { nativeBuildInputs = [ wasm-capture nix ]; } ''
+    nix-store --restore package < ${nar}/${name}-${manifest.version}.nar
+    widget=$(echo package/lib/bmc-widgets/*/${name})
+    wasm-capture run "$widget/lib/wasm/${name}.wasm" \
+      --asset-root "$widget/lib/assets" \
+      --capture-dir ${src}/capture \
+      --all-targets \
+      --output $out
+  '';
 in
 {
-  inherit nar;
+  inherit nar captures;
 
   fmt = mkCargo "${name}-fmt" { buildPhase = "cargo fmt -- --check"; };
 

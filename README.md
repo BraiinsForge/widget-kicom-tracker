@@ -44,6 +44,7 @@ With Nix:
 
 ```sh
 nix build            # result/kicom-tracker-<version>.nar and .nar.json
+nix build .#captures # PNG captures on every supported target; not part of CI
 nix flake check      # formatting, Clippy, tests and the NAR
 ```
 
@@ -66,6 +67,12 @@ Packaging fails while the two locks name different revisions.
 1. raise `version` in `manifest.json` and `Cargo.toml`, and the display name's ` v<version>` suffix
 2. keep the `uid`
 3. merge to `master`; CI publishes the build
+
+## Captures
+
+- `capture/` drives bmc-main's `wasm-capture`
+- its fixture replays `tests/fixtures/wagers-v1.json`; regenerate it with `./scripts/capture-fixture.py`
+- captures render through software GL, so they verify neither a physical Deck nor its GPU
 
 ## License
 

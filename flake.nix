@@ -1,8 +1,8 @@
 {
   description = "Kicom Tracker, a Braiins Deck widget";
 
-  # The manifest schema, the launcher template and the extractor come from this pin,
-  # which must match Cargo.lock's SDK revision.
+  # The manifest schema, the launcher template, the extractor and the capture tool
+  # come from this pin, which must match Cargo.lock's SDK revision.
   inputs.bmc-main.url = "git+https://github.com/BraiinsForge/bmc-main?ref=bmcpkgs/stable-26.10&shallow=1";
 
   outputs = { self, bmc-main }:
@@ -17,12 +17,13 @@
         pkgs.callPackage ./nix/widget.nix {
           src = self;
           inherit bmc-main;
+          wasm-capture = bmc-main.packages.${system}.wasm-capture;
         };
     in
     {
       packages = forAllSystems (system: {
         default = (perSystem system).nar;
-        inherit (perSystem system) nar;
+        inherit (perSystem system) nar captures;
       });
 
       checks = forAllSystems (system: {

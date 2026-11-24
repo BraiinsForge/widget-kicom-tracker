@@ -1,0 +1,30 @@
+# Visual capture of the packaged widget, rendered by bmc-main's wasm-capture.
+# The fixture is written by scripts/capture-fixture.py. It carries no geometry,
+# so the one take serves every target.
+
+# Settle a few frames after the feed arrives so the widget leaves Loading.
+settle_delay = 5
+
+[fixtures.bmc100-small]
+path = "fixtures/wagers-v1.jsonl.gz"
+target = "bmc100:small"
+
+[fixtures.bmc100-medium]
+path = "fixtures/wagers-v1.jsonl.gz"
+target = "bmc100:medium"
+
+[fixtures.bmc100-large]
+path = "fixtures/wagers-v1.jsonl.gz"
+target = "bmc100:large"
+
+[fixtures.bmc100-full]
+path = "fixtures/wagers-v1.jsonl.gz"
+target = "bmc100:full"
+
+[fixtures.bmm100-full]
+path = "fixtures/wagers-v1.jsonl.gz"
+target = "bmm100:full"
+
+[fixtures.bmm101-full]
+path = "fixtures/wagers-v1.jsonl.gz"
+target = "bmm101:full"

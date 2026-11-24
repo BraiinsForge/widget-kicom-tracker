@@ -8,3 +8,5 @@
   `docs/uploading-wasm-widgets.md` and uses the launcher template verbatim.
 - Always include the release version in the widget's display name. Increase the version for every
   delivered update while keeping its UID stable.
+- The `nix build` captures render the packaged widget through software GL. They do not verify GPU
+  output or installation on a physical Deck.
