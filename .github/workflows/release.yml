@@ -1,0 +1,68 @@
+name: Build
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Not nix-quick-install-action, which cache-nix-action's examples use:
+      # its newest Nix (2.34.7) fails bmc-main's LFS fetch with HTTP 422.
+      - uses: cachix/install-nix-action@v31
+
+      # Nix asks GitHub's LFS API once per bmc-main file without credentials,
+      # which a shared runner address exhausts before the fetch is done.
+      - name: Authenticate Nix to GitHub
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          printf 'machine github.com login x-access-token password %s\n' "$TOKEN" > "$RUNNER_TEMP/netrc"
+          echo "NIX_CONFIG=netrc-file = $RUNNER_TEMP/netrc" >> "$GITHUB_ENV"
+
+      # The asset extractor is built from bmc-main's source; the store cache spares that on later runs.
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock', '**/Cargo.lock') }}
+          restore-prefixes-first-match: nix-${{ runner.os }}-
+          gc-max-store-size-linux: 8G
+
+      - name: Check
+        run: nix flake check -L
+
+      - name: Collect the release files
+        run: |
+          nar=$(nix build .#nar --no-link --print-out-paths)
+          mkdir release
+          cp "$nar"/* release/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kicom-tracker
+          path: release/
+
+      # One rolling release that always holds the build of the newest master commit.
+      - name: Publish the latest release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(jq -r .version manifest.json)
+          if gh release view latest > /dev/null 2>&1; then
+            gh release delete latest --yes --cleanup-tag
+          fi
+          gh release create latest release/* \
+            --target "$GITHUB_SHA" \
+            --title "Kicom Tracker $version (latest master)" \
+            --notes "Built from $GITHUB_SHA. Install the .nar via Display Widgets > Install Widget on the Deck."

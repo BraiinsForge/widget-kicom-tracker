@@ -31,7 +31,9 @@ Rotation and data:
 
 ## Install
 
-On the Deck, open **Display Widgets → Install Widget** and pick the built `.nar`.
+- release: the `.nar` from the [`latest` release](../../releases/tag/latest), rebuilt from every `master` commit
+- branch or pull request: the `kicom-tracker` artifact of its run on the [Actions](../../actions) page
+- on the Deck: **Display Widgets → Install Widget**, then pick the file
 
 ## Build
 
@@ -63,7 +65,7 @@ Packaging fails while the two locks name different revisions.
 
 1. raise `version` in `manifest.json` and `Cargo.toml`, and the display name's ` v<version>` suffix
 2. keep the `uid`
-3. build and install the new `.nar`
+3. merge to `master`; CI publishes the build
 
 ## License
 
