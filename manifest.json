@@ -1,7 +1,7 @@
 {
   "uid": "0ca26df2-ec61-462f-839c-7e20a44e37bb",
-  "version": "0.1.16",
-  "name": "Kicom Tracker v0.1.16",
+  "version": "0.1.17",
+  "name": "Kicom Tracker v0.1.17",
   "description": "Aktuální Kicomovy sázky a nedávné výsledky z AOX.cz.",
   "binary": "bin/kicom-tracker",
   "icon": "assets/icon.svg",
