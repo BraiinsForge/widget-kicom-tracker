@@ -95,35 +95,65 @@ mod rotation_tests {
     }
 }
 
-pub fn avatar_url(path: &str) -> Option<String> {
-    const BASE: &str = "https://www.aox.cz/kicomtracker/";
-    let relative = path.strip_prefix(BASE).unwrap_or(path);
-    let filename = relative.strip_prefix("assets/avatars/")?;
-    if filename.is_empty()
-        || !filename
+/// A path starting with `/` is relative to Nexus; a full URL is used as it is.
+pub fn avatar_url(avatar: &str) -> Option<String> {
+    const NEXUS: &str = "https://nexus.braiinsforge.com";
+    let url = if avatar.starts_with('/') {
+        format!("{NEXUS}{avatar}")
+    } else if avatar.starts_with("https://") || avatar.starts_with("http://") {
+        avatar.to_owned()
+    } else {
+        return None;
+    };
+    // The file name becomes the photo's cache key.
+    let file = url
+        .rsplit('/')
+        .next()
+        .expect("BUG: rsplit yields at least one piece");
+    if file.is_empty()
+        || !file
             .bytes()
             .all(|b| b.is_ascii_alphanumeric() || b"._-".contains(&b))
     {
         return None;
     }
-    Some(format!("{BASE}assets/avatars/{filename}"))
+    Some(url)
 }
 
 #[cfg(test)]
 mod avatar_tests {
     use super::*;
     #[test]
-    fn resolves_source_avatars_and_rejects_unrelated_paths() {
-        let url = "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg";
-        assert_eq!(avatar_url("assets/avatars/kicom.jpg").as_deref(), Some(url));
-        assert_eq!(avatar_url(url).as_deref(), Some(url));
+    fn resolves_paths_against_nexus_and_keeps_full_urls() {
+        let url = "https://nexus.braiinsforge.com/api/v1/data/kicomtracker/avatar/Kicom21-jpg.jpg";
+        assert_eq!(
+            avatar_url("/api/v1/data/kicomtracker/avatar/Kicom21-jpg.jpg").as_deref(),
+            Some(url)
+        );
+        assert_eq!(
+            avatar_url(url).as_deref(),
+            Some(url),
+            "a full URL to the same photo resolves alike, so the cached photo stays"
+        );
+        for full in [
+            "https://cdn.example.com/a/b.jpg",
+            "http://example.com/b.jpg",
+        ] {
+            assert_eq!(avatar_url(full).as_deref(), Some(full));
+        }
+    }
+
+    #[test]
+    fn rejects_avatars_without_a_usable_file_name() {
         for invalid in [
             "",
-            "assets/avatars/",
-            "assets/avatars/../secret",
-            "https://example.com/a.jpg",
+            "Kicom21-jpg.jpg",
+            "api/v1/data/kicomtracker/avatar/Kicom21-jpg.jpg",
+            "ftp://example.com/b.jpg",
+            "/api/v1/data/kicomtracker/avatar/",
+            "https://example.com/b.jpg?size=480",
         ] {
-            assert!(avatar_url(invalid).is_none());
+            assert!(avatar_url(invalid).is_none(), "{invalid} must not resolve");
         }
     }
 }

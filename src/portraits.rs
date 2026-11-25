@@ -123,11 +123,11 @@ mod tests {
 
     #[test]
     fn cache_tag_has_no_path_separator() {
-        let url =
-            crate::model::avatar_url("assets/avatars/Kicom21.jpg").expect("a valid avatar path");
+        let url = crate::model::avatar_url("/api/v1/data/kicomtracker/avatar/Kicom21-jpg.jpg")
+            .expect("a valid avatar path");
         let tag = cache_tag(&url);
         assert!(!tag.contains('/'), "the host refuses {tag} as a cache key");
-        assert_eq!(tag, "kicom.portrait.Kicom21.jpg");
+        assert_eq!(tag, "kicom.portrait.Kicom21-jpg.jpg");
     }
 }
 

@@ -26,62 +26,38 @@ pub(crate) fn date(value: &str) -> Option<i64> {
     parse_datetime(value).or_else(|| parse_datetime(&format!("{value}T00:00:00Z")))
 }
 
-// Only old, unversioned offline snapshots need these historical dates.
-fn historical_date(id: &str) -> Option<&'static str> {
-    match id {
-        "trump-top10"
-        | "cybertruck-production-2025"
-        | "model-y-top10-2025"
-        | "austin-robotaxi-100-2025" => Some("2026-01-09"),
-        "austin-robotaxi-100-2026" => Some("2026-10-27"),
-        _ => None,
-    }
-}
-
-pub(crate) fn parse(body: &[u8], allow_legacy: bool) -> Option<(Vec<Bet>, String)> {
+pub(crate) fn parse(body: &[u8]) -> Option<(Vec<Bet>, String)> {
     let doc = JsonDoc::parse(body);
-    let legacy = doc.kind("/schemaVersion").is_none() && allow_legacy;
-    if !legacy && doc.f64("/schemaVersion") != Some(1.0) {
+    if doc.f64("/data/schema_version") != Some(1.0) {
         return None;
     }
-    let generated = doc.str("/generatedAt")?;
+    let generated = doc.str("/data/generated_at")?;
     date(&generated)?;
-    let count = doc.len("/wagers")?;
-    if doc.kind("/wagers") != Some(JsonKind::Array) || count > 256 || (!legacy && count == 0) {
+    let count = doc.len("/data/wagers")?;
+    if doc.kind("/data/wagers") != Some(JsonKind::Array) || count > 256 || count == 0 {
         return None;
     }
     // Validate all required identifiers before changing persistent state.
     let mut ids = std::collections::BTreeSet::new();
     for i in 0..count {
-        let p = format!("/wagers/{i}");
+        let p = format!("/data/wagers/{i}");
         let id = doc.str(&format!("{p}/id"))?;
         if id.is_empty() || id.len() > 100 || !ids.insert(id) {
             return None;
         }
         doc.str(&format!("{p}/title"))?;
         doc.str(&format!("{p}/status"))?;
-        if !legacy {
-            doc.str(&format!("{p}/claim"))?;
-            doc.str(&format!("{p}/outcomeNote"))?;
-            date(&doc.str(&format!("{p}/deadline"))?)?;
-        }
+        doc.str(&format!("{p}/claim"))?;
+        doc.str(&format!("{p}/outcome_note"))?;
+        date(&doc.str(&format!("{p}/deadline"))?)?;
     }
     let mut bets = Vec::new();
     for i in 0..count {
-        let p = format!("/wagers/{i}");
+        let p = format!("/data/wagers/{i}");
         let get = |field: &str| doc.str(&format!("{p}/{field}")).unwrap_or_default();
-        let id = get("id");
-        let status = get("status");
-        let closed = if legacy {
-            ["closedAt", "resolvedAt", "finishedAt"]
-                .iter()
-                .find_map(|field| date(&get(field)))
-                .or_else(|| historical_date(&id).and_then(date))
-        } else {
-            match doc.kind(&format!("{p}/closedAt")) {
-                None | Some(JsonKind::Null) => None,
-                _ => Some(date(&doc.str(&format!("{p}/closedAt"))?)?),
-            }
+        let closed = match doc.kind(&format!("{p}/closed_at")) {
+            None | Some(JsonKind::Null) => None,
+            _ => Some(date(&doc.str(&format!("{p}/closed_at"))?)?),
         };
         let mut metrics = Vec::new();
         let value = get("metric/value");
@@ -93,26 +69,11 @@ pub(crate) fn parse(body: &[u8], allow_legacy: bool) -> Option<(Vec<Bet>, String
                 get("metric/detail")
             ));
         }
-        // Market predictions are deliberately excluded: their labels may be English
-        // and they are not the result of a bet.
-        for j in 0..if legacy {
-            doc.len(&format!("{p}/liveMetrics")).unwrap_or(0).min(32)
-        } else {
-            0
-        } {
-            metrics.push(format!(
-                "{}: {}",
-                get(&format!("liveMetrics/{j}/label")),
-                get(&format!("liveMetrics/{j}/value"))
-            ));
-        }
         let mut people = vec![Person {
             name: doc
                 .str(&format!("{p}/kicom/name"))
                 .unwrap_or_else(|| "Kicom".into()),
-            position: doc
-                .str(&format!("{p}/kicom/position"))
-                .unwrap_or_else(|| get("kicomPosition")),
+            position: get("kicom/position"),
             avatar: get("kicom/avatar"),
         }];
         for j in 0..doc.len(&format!("{p}/counterparties")).unwrap_or(0).min(16) {
@@ -122,27 +83,15 @@ pub(crate) fn parse(body: &[u8], allow_legacy: bool) -> Option<(Vec<Bet>, String
                 avatar: get(&format!("counterparties/{j}/avatar")),
             });
         }
-        if people.len() == 1 && !get("counterparty").is_empty() {
-            people.push(Person {
-                name: get("counterparty"),
-                position: String::new(),
-                avatar: String::new(),
-            });
-        }
         bets.push(Bet {
-            id,
+            id: get("id"),
             title: get("title"),
-            status,
+            status: get("status"),
             deadline: get("deadline"),
-            subject: if legacy {
-                doc.str(&format!("{p}/subject"))
-                    .unwrap_or_else(|| get("claim"))
-            } else {
-                get("claim")
-            },
+            subject: get("claim"),
             people,
             stake: get("stake"),
-            outcome: get(if legacy { "outcome" } else { "outcomeNote" }),
+            outcome: get("outcome_note"),
             metrics,
             closed,
         });
@@ -165,7 +114,7 @@ mod tests {
 
     #[test]
     fn partner_feed_preserves_content_participants_and_retention() {
-        let (bets, generated) = parse(FEED.as_bytes(), false).unwrap();
+        let (bets, generated) = parse(FEED.as_bytes()).unwrap();
         assert_eq!(bets.len(), 13);
         assert_eq!(generated, "2026-11-22T09:04:32Z");
         let coin = bets.iter().find(|b| b.id == "vzorkoin-cena-2026").unwrap();
@@ -196,11 +145,11 @@ mod tests {
             .replace("\"status\": \"open\"", "\"status\": \"review\"")
             .replace("\"position\": \"NE\"", "\"position\": null")
             .replace(
-                "\"avatar\": \"https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg\"",
+                "\"avatar\": \"/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg\"",
                 "\"avatar\": null",
             )
             .replace("\"stake\": \"Nedoloženo\"", "\"stake\": null");
-        let (bets, _) = parse(input.as_bytes(), false).unwrap();
+        let (bets, _) = parse(input.as_bytes()).unwrap();
         let review = bets.iter().find(|b| b.status == "review").unwrap();
         assert!(visible(&review.status, review.closed, i64::MAX, 0));
         assert!(review.people[0].avatar.is_empty());
@@ -213,36 +162,21 @@ mod tests {
     #[test]
     fn incompatible_or_malformed_snapshots_do_not_replace_cache() {
         for input in [
-            FEED.replace("\"schemaVersion\": 1", "\"schemaVersion\": 2"),
-            FEED.replace("\"schemaVersion\": 1", "\"schemaVersion\": null"),
-            FEED.replace("\"schemaVersion\": 1", "\"schemaVersion\": \"1\""),
-            FEED.replace("\"outcomeNote\":", "\"outcome\":"),
-            FEED.replace("\"closedAt\": \"2024-11-13\"", "\"closedAt\": \"invalid\""),
+            FEED.replace("\"schema_version\": 1", "\"schema_version\": 2"),
+            FEED.replace("\"schema_version\": 1", "\"schema_version\": null"),
+            FEED.replace("\"schema_version\": 1", "\"schema_version\": \"1\""),
+            FEED.replace("\"outcome_note\":", "\"outcomeNote\":"),
+            FEED.replace(
+                "\"closed_at\": \"2024-11-13\"",
+                "\"closed_at\": \"invalid\"",
+            ),
             FEED.replace(
                 "\"id\": \"vzorkoin-top10\"",
                 "\"id\": \"vzorkoin-cena-2026\"",
             ),
+            FEED.replace("\"data\": {", "\"feed\": {"),
         ] {
-            assert!(parse(input.as_bytes(), false).is_none());
+            assert!(parse(input.as_bytes()).is_none());
         }
-    }
-
-    #[test]
-    fn old_snapshots_are_only_accepted_for_offline_restore() {
-        let old = br#"{"generatedAt":"2026-11-20T08:03:24Z","wagers":[{"id":"trump-top10","title":"Trump","status":"won","subject":"Old conditions","outcome":"Old result","counterparty":"Opponent"}]}"#;
-        assert!(parse(old, false).is_none());
-        let (bets, _) = parse(old, true).unwrap();
-        assert_eq!(bets[0].subject, "Old conditions");
-        assert_eq!(bets[0].outcome, "Old result");
-        assert_eq!(bets[0].people.len(), 2);
-        assert_eq!(bets[0].closed, date("2026-01-09"));
-        assert!(
-            parse(
-                FEED.replace("\"schemaVersion\": 1", "\"schemaVersion\": 2")
-                    .as_bytes(),
-                true
-            )
-            .is_none()
-        );
     }
 }

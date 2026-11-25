@@ -1,348 +1,353 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-11-22T09:04:32Z",
-  "wagers": [
-    {
-      "id": "kolo-dodavky-2023",
-      "title": "Vzorkol: 100 dodaných elektrokol v roce 2023",
-      "claim": "Fiktivní výrobce Vzorkol dodá do konce roku 2023 zákazníkům sto elektrokol.",
-      "deadline": "2023-12-31",
-      "status": "draw",
-      "outcomeNote": "Sázka skončila remízou, počet dodávek nešlo ověřit.",
-      "sourceUrl": "https://example.com/sazky/kolo-dodavky-2023",
-      "trackerUrl": "https://example.com/tracker/#sazka-kolo-dodavky-2023",
-      "kicom": {
-        "name": "Kicom",
-        "position": "NE",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
-      },
-      "counterparties": [
-        {
-          "name": "Petr Pokus",
-          "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/petr-pokus.jpg"
-        }
-      ],
-      "stake": "Nedoloženo",
-      "metric": null,
-      "closedAt": "2024-11-13"
-    },
-    {
-      "id": "vzorkoin-top10",
-      "title": "Vzorkoin v TOP 10",
-      "claim": "Fiktivní token Vzorkoin se dostane do TOP 10 podle tržní kapitalizace.",
-      "deadline": "2025-12-31",
-      "status": "won",
-      "outcomeNote": "Token se do TOP 10 nedostal.",
-      "sourceUrl": "https://example.com/sazky/vzorkoin-top10",
-      "trackerUrl": "https://example.com/tracker/#sazka-vzorkoin-top10",
-      "kicom": {
-        "name": "Kicom",
-        "position": "NE",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
-      },
-      "counterparties": [
-        {
-          "name": "Eva Ukázková",
-          "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/eva-ukazkova.jpg"
-        }
-      ],
-      "stake": "Basa piva",
-      "metric": {
-        "label": "Aktuální pořadí",
-        "value": "#134",
-        "detail": "Tržní kapitalizace 250 mil. Kč"
-      },
-      "closedAt": "2026-01-09"
-    },
-    {
-      "id": "kolo-vyroba-2025",
-      "title": "Vzorkol: méně kol než 2024",
-      "claim": "Vzorkol vyrobí v roce 2025 méně elektrokol než v roce 2024.",
-      "deadline": "2025-12-31",
-      "status": "won",
-      "outcomeNote": "Výroba podle výroční zprávy klesla.",
-      "sourceUrl": "https://example.com/sazky/kolo-vyroba-2025",
-      "trackerUrl": "https://example.com/tracker/#sazka-kolo-vyroba-2025",
-      "kicom": {
-        "name": "Kicom",
-        "position": "ANO",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
-      },
-      "counterparties": [
-        {
-          "name": "Tomáš Zkouška",
+  "resource": "kicomtracker/wagers",
+  "data": {
+    "schema_version": 1,
+    "generated_at": "2026-11-22T09:04:32Z",
+    "wagers": [
+      {
+        "id": "kolo-dodavky-2023",
+        "title": "Vzorkol: 100 dodaných elektrokol v roce 2023",
+        "claim": "Fiktivní výrobce Vzorkol dodá do konce roku 2023 zákazníkům sto elektrokol.",
+        "deadline": "2023-12-31",
+        "status": "draw",
+        "outcome_note": "Sázka skončila remízou, počet dodávek nešlo ověřit.",
+        "source_url": "https://example.com/sazky/kolo-dodavky-2023",
+        "tracker_url": "https://example.com/tracker/#sazka-kolo-dodavky-2023",
+        "kicom": {
+          "name": "Kicom",
           "position": "NE",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/tomas-zkouska.jpg"
-        }
-      ],
-      "stake": "Láhev rumu",
-      "metric": null,
-      "closedAt": "2026-01-09"
-    },
-    {
-      "id": "kavarna-top10-2025",
-      "title": "Robotická kavárna v TOP 10",
-      "claim": "Robotická kavárna ve Vzorkově se v roce 2025 dostane mezi deset nejlépe hodnocených kaváren kraje.",
-      "deadline": "2025-12-31",
-      "status": "lost",
-      "outcomeNote": "Kavárna skončila v hodnocení na 4. místě.",
-      "sourceUrl": "https://example.com/sazky/kavarna-top10-2025",
-      "trackerUrl": "https://example.com/tracker/#sazka-kavarna-top10-2025",
-      "kicom": {
-        "name": "Kicom",
-        "position": "NE",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
-      },
-      "counterparties": [
-        {
-          "name": "Lenka Příkladová",
-          "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/lenka-prikladova.jpg"
-        }
-      ],
-      "stake": "Karton šesti lahví šampaňského, nebo dar 15 000 Kč na charitu podle volby vítěze",
-      "metric": null,
-      "closedAt": "2026-01-09"
-    },
-    {
-      "id": "drony-100-2025",
-      "title": "100 doručovacích dronů ve Vzorkově",
-      "claim": "Ve Vzorkově bude do konce roku 2025 létat sto doručovacích dronů.",
-      "deadline": "2025-12-31",
-      "status": "won",
-      "outcomeNote": "Na konci roku jich létalo třicet.",
-      "sourceUrl": "https://example.com/sazky/drony-100-2025",
-      "trackerUrl": "https://example.com/tracker/#sazka-drony-100-2025",
-      "kicom": {
-        "name": "Kicom",
-        "position": "NE",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
-      },
-      "counterparties": [
-        {
-          "name": "Jana Testová",
-          "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/jana-testova.jpg"
-        }
-      ],
-      "stake": "Karton šesti lahví šampaňského",
-      "metric": null,
-      "closedAt": "2026-01-09"
-    },
-    {
-      "id": "vzorkoin-cena-2026",
-      "title": "Vzorkoin nad 2 000 Kč",
-      "claim": "Fiktivní token Vzorkoin bude na konci roku 2026 stát přes 2 000 Kč.",
-      "deadline": "2026-12-31",
-      "status": "open",
-      "outcomeNote": "Rozhoduje závěrečný kurz na burze Vzorek k 31. 12. 2026.",
-      "sourceUrl": "https://example.com/sazky/vzorkoin-cena-2026",
-      "trackerUrl": "https://example.com/tracker/#sazka-vzorkoin-cena-2026",
-      "kicom": {
-        "name": "Kicom",
-        "position": "NE",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
-      },
-      "counterparties": [
-        {
-          "name": "Eva Ukázková",
-          "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/eva-ukazkova.jpg"
-        }
-      ],
-      "stake": "10 000 Kč na charitativní účely",
-      "metric": {
-        "label": "Aktuální kurz",
-        "value": "1 412 Kč",
-        "detail": "Burza Vzorek"
-      },
-      "closedAt": null
-    },
-    {
-      "id": "drony-100-2026",
-      "title": "100 doručovacích dronů do prosince 2026",
-      "claim": "Ve Vzorkově bude do 17. 12. 2026 létat sto doručovacích dronů bez pilota.",
-      "deadline": "2026-12-17",
-      "status": "lost",
-      "outcomeNote": "Město oznámilo stý schválený dron už v říjnu.",
-      "sourceUrl": "https://example.com/sazky/drony-100-2026",
-      "trackerUrl": "https://example.com/tracker/#sazka-drony-100-2026",
-      "kicom": {
-        "name": "Kicom",
-        "position": "NE",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
-      },
-      "counterparties": [
-        {
-          "name": "Martin Vzor",
-          "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/martin-vzor.jpg"
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
         },
-        {
-          "name": "Klára Pokusná",
-          "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/klara-pokusna.jpg"
-        }
-      ],
-      "stake": "Při Kicomově prohře video o omylu a jedno roční předplatné pro každého ze soupeřů; opačně šampaňské dovezené do Vzorkova",
-      "metric": null,
-      "closedAt": "2026-10-27"
-    },
-    {
-      "id": "vzorkol-ztraty-2026",
-      "title": "Vzorkol: pět ztrátových čtvrtletí",
-      "claim": "Vzorkol vykáže pět ztrátových čtvrtletí v řadě.",
-      "deadline": "2026-12-31",
-      "status": "lost",
-      "outcomeNote": "Vzorkol hned v dalším čtvrtletí vykázal zisk.",
-      "sourceUrl": "https://example.com/sazky/vzorkol-ztraty-2026",
-      "trackerUrl": "https://example.com/tracker/#sazka-vzorkol-ztraty-2026",
-      "kicom": {
-        "name": "Kicom",
-        "position": "ANO",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
+        "counterparties": [
+          {
+            "name": "Petr Pokus",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/petr-pokus-jpg.jpg"
+          }
+        ],
+        "stake": "Nedoloženo",
+        "metric": null,
+        "closed_at": "2024-11-13"
       },
-      "counterparties": [
-        {
-          "name": "Eva Ukázková",
+      {
+        "id": "vzorkoin-top10",
+        "title": "Vzorkoin v TOP 10",
+        "claim": "Fiktivní token Vzorkoin se dostane do TOP 10 podle tržní kapitalizace.",
+        "deadline": "2025-12-31",
+        "status": "won",
+        "outcome_note": "Token se do TOP 10 nedostal.",
+        "source_url": "https://example.com/sazky/vzorkoin-top10",
+        "tracker_url": "https://example.com/tracker/#sazka-vzorkoin-top10",
+        "kicom": {
+          "name": "Kicom",
           "position": "NE",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/eva-ukazkova.jpg"
-        }
-      ],
-      "stake": "Balení vín",
-      "metric": null,
-      "closedAt": "2026-01-28"
-    },
-    {
-      "id": "snih-vzorkov-2027",
-      "title": "Bílé Vánoce ve Vzorkově 2027",
-      "claim": "Na Štědrý den 2027 bude ve Vzorkově ležet aspoň 5 cm sněhu.",
-      "deadline": "2027-12-24",
-      "status": "open",
-      "outcomeNote": "Rozhoduje ranní měření stanice Vzorkov.",
-      "sourceUrl": "https://example.com/sazky/snih-vzorkov-2027",
-      "trackerUrl": "https://example.com/tracker/#sazka-snih-vzorkov-2027",
-      "kicom": {
-        "name": "Kicom",
-        "position": "ANO",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Eva Ukázková",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/eva-ukazkova-jpg.jpg"
+          }
+        ],
+        "stake": "Basa piva",
+        "metric": {
+          "label": "Aktuální pořadí",
+          "value": "#134",
+          "detail": "Tržní kapitalizace 250 mil. Kč"
+        },
+        "closed_at": "2026-01-09"
       },
-      "counterparties": [
-        {
-          "name": "Petr Pokus",
+      {
+        "id": "kolo-vyroba-2025",
+        "title": "Vzorkol: méně kol než 2024",
+        "claim": "Vzorkol vyrobí v roce 2025 méně elektrokol než v roce 2024.",
+        "deadline": "2025-12-31",
+        "status": "won",
+        "outcome_note": "Výroba podle výroční zprávy klesla.",
+        "source_url": "https://example.com/sazky/kolo-vyroba-2025",
+        "tracker_url": "https://example.com/tracker/#sazka-kolo-vyroba-2025",
+        "kicom": {
+          "name": "Kicom",
+          "position": "ANO",
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Tomáš Zkouška",
+            "position": "NE",
+            "avatar": "/api/v1/data/kicomtracker/avatar/tomas-zkouska-jpg.jpg"
+          }
+        ],
+        "stake": "Láhev rumu",
+        "metric": null,
+        "closed_at": "2026-01-09"
+      },
+      {
+        "id": "kavarna-top10-2025",
+        "title": "Robotická kavárna v TOP 10",
+        "claim": "Robotická kavárna ve Vzorkově se v roce 2025 dostane mezi deset nejlépe hodnocených kaváren kraje.",
+        "deadline": "2025-12-31",
+        "status": "lost",
+        "outcome_note": "Kavárna skončila v hodnocení na 4. místě.",
+        "source_url": "https://example.com/sazky/kavarna-top10-2025",
+        "tracker_url": "https://example.com/tracker/#sazka-kavarna-top10-2025",
+        "kicom": {
+          "name": "Kicom",
           "position": "NE",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/petr-pokus.jpg"
-        }
-      ],
-      "stake": "Láhev šampaňského",
-      "metric": {
-        "label": "Sníh tuto zimu",
-        "value": "0 cm",
-        "detail": "Stanice Vzorkov"
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Lenka Příkladová",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/lenka-prikladova-jpg.jpg"
+          }
+        ],
+        "stake": "Karton šesti lahví šampaňského, nebo dar 15 000 Kč na charitu podle volby vítěze",
+        "metric": null,
+        "closed_at": "2026-01-09"
       },
-      "closedAt": null
-    },
-    {
-      "id": "maraton-pod-3-2027",
-      "title": "Maraton pod tři hodiny",
-      "claim": "Tomáš Zkouška uběhne do konce roku 2027 maraton pod tři hodiny.",
-      "deadline": "2027-12-31",
-      "status": "open",
-      "outcomeNote": "Platí oficiální čas z cíle libovolného maratonu.",
-      "sourceUrl": "https://example.com/sazky/maraton-pod-3-2027",
-      "trackerUrl": "https://example.com/tracker/#sazka-maraton-pod-3-2027",
-      "kicom": {
-        "name": "Kicom",
-        "position": "NE",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
+      {
+        "id": "drony-100-2025",
+        "title": "100 doručovacích dronů ve Vzorkově",
+        "claim": "Ve Vzorkově bude do konce roku 2025 létat sto doručovacích dronů.",
+        "deadline": "2025-12-31",
+        "status": "won",
+        "outcome_note": "Na konci roku jich létalo třicet.",
+        "source_url": "https://example.com/sazky/drony-100-2025",
+        "tracker_url": "https://example.com/tracker/#sazka-drony-100-2025",
+        "kicom": {
+          "name": "Kicom",
+          "position": "NE",
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Jana Testová",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/jana-testova-jpg.jpg"
+          }
+        ],
+        "stake": "Karton šesti lahví šampaňského",
+        "metric": null,
+        "closed_at": "2026-01-09"
       },
-      "counterparties": [
-        {
-          "name": "Tomáš Zkouška",
+      {
+        "id": "vzorkoin-cena-2026",
+        "title": "Vzorkoin nad 2 000 Kč",
+        "claim": "Fiktivní token Vzorkoin bude na konci roku 2026 stát přes 2 000 Kč.",
+        "deadline": "2026-12-31",
+        "status": "open",
+        "outcome_note": "Rozhoduje závěrečný kurz na burze Vzorek k 31. 12. 2026.",
+        "source_url": "https://example.com/sazky/vzorkoin-cena-2026",
+        "tracker_url": "https://example.com/tracker/#sazka-vzorkoin-cena-2026",
+        "kicom": {
+          "name": "Kicom",
+          "position": "NE",
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Eva Ukázková",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/eva-ukazkova-jpg.jpg"
+          }
+        ],
+        "stake": "10 000 Kč na charitativní účely",
+        "metric": {
+          "label": "Aktuální kurz",
+          "value": "1 412 Kč",
+          "detail": "Burza Vzorek"
+        },
+        "closed_at": null
+      },
+      {
+        "id": "drony-100-2026",
+        "title": "100 doručovacích dronů do prosince 2026",
+        "claim": "Ve Vzorkově bude do 17. 12. 2026 létat sto doručovacích dronů bez pilota.",
+        "deadline": "2026-12-17",
+        "status": "lost",
+        "outcome_note": "Město oznámilo stý schválený dron už v říjnu.",
+        "source_url": "https://example.com/sazky/drony-100-2026",
+        "tracker_url": "https://example.com/tracker/#sazka-drony-100-2026",
+        "kicom": {
+          "name": "Kicom",
+          "position": "NE",
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Martin Vzor",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/martin-vzor-jpg.jpg"
+          },
+          {
+            "name": "Klára Pokusná",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/klara-pokusna-jpg.jpg"
+          }
+        ],
+        "stake": "Při Kicomově prohře video o omylu a jedno roční předplatné pro každého ze soupeřů; opačně šampaňské dovezené do Vzorkova",
+        "metric": null,
+        "closed_at": "2026-10-27"
+      },
+      {
+        "id": "vzorkol-ztraty-2026",
+        "title": "Vzorkol: pět ztrátových čtvrtletí",
+        "claim": "Vzorkol vykáže pět ztrátových čtvrtletí v řadě.",
+        "deadline": "2026-12-31",
+        "status": "lost",
+        "outcome_note": "Vzorkol hned v dalším čtvrtletí vykázal zisk.",
+        "source_url": "https://example.com/sazky/vzorkol-ztraty-2026",
+        "tracker_url": "https://example.com/tracker/#sazka-vzorkol-ztraty-2026",
+        "kicom": {
+          "name": "Kicom",
           "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/tomas-zkouska.jpg"
-        }
-      ],
-      "stake": "Basa nealkoholického piva",
-      "metric": null,
-      "closedAt": null
-    },
-    {
-      "id": "robot-kavarna-2027",
-      "title": "Kavárna jen s robotem",
-      "claim": "Do konce roku 2027 otevře ve Vzorkově kavárna, kde kávu připravuje jen robot.",
-      "deadline": "2027-12-31",
-      "status": "open",
-      "outcomeNote": "Stačí jedna veřejně přístupná kavárna.",
-      "sourceUrl": "https://example.com/sazky/robot-kavarna-2027",
-      "trackerUrl": "https://example.com/tracker/#sazka-robot-kavarna-2027",
-      "kicom": {
-        "name": "Kicom",
-        "position": "NE",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Eva Ukázková",
+            "position": "NE",
+            "avatar": "/api/v1/data/kicomtracker/avatar/eva-ukazkova-jpg.jpg"
+          }
+        ],
+        "stake": "Balení vín",
+        "metric": null,
+        "closed_at": "2026-01-28"
       },
-      "counterparties": [
-        {
-          "name": "Lenka Příkladová",
+      {
+        "id": "snih-vzorkov-2027",
+        "title": "Bílé Vánoce ve Vzorkově 2027",
+        "claim": "Na Štědrý den 2027 bude ve Vzorkově ležet aspoň 5 cm sněhu.",
+        "deadline": "2027-12-24",
+        "status": "open",
+        "outcome_note": "Rozhoduje ranní měření stanice Vzorkov.",
+        "source_url": "https://example.com/sazky/snih-vzorkov-2027",
+        "tracker_url": "https://example.com/tracker/#sazka-snih-vzorkov-2027",
+        "kicom": {
+          "name": "Kicom",
           "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/lenka-prikladova.jpg"
-        }
-      ],
-      "stake": "Káva na celý rok",
-      "metric": null,
-      "closedAt": null
-    },
-    {
-      "id": "tramvaj-letiste-2028",
-      "title": "Tramvaj na letiště",
-      "claim": "Vzorkov dokončí tramvajovou trať na letiště do konce roku 2028.",
-      "deadline": "2028-12-31",
-      "status": "open",
-      "outcomeNote": "Rozhoduje zahájení pravidelného provozu.",
-      "sourceUrl": "https://example.com/sazky/tramvaj-letiste-2028",
-      "trackerUrl": "https://example.com/tracker/#sazka-tramvaj-letiste-2028",
-      "kicom": {
-        "name": "Kicom",
-        "position": "NE",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Petr Pokus",
+            "position": "NE",
+            "avatar": "/api/v1/data/kicomtracker/avatar/petr-pokus-jpg.jpg"
+          }
+        ],
+        "stake": "Láhev šampaňského",
+        "metric": {
+          "label": "Sníh tuto zimu",
+          "value": "0 cm",
+          "detail": "Stanice Vzorkov"
+        },
+        "closed_at": null
       },
-      "counterparties": [
-        {
-          "name": "Jana Testová",
-          "position": "ANO",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/jana-testova.jpg"
-        }
-      ],
-      "stake": "Večeře pro dva; při Kicomově prohře i s dezertem",
-      "metric": null,
-      "closedAt": null
-    },
-    {
-      "id": "vzorkov-2030",
-      "title": "Budoucnost Vzorkova",
-      "claim": "Do roku 2030 bude Vzorkov buď největším, nebo nejmenším městem kraje.",
-      "deadline": "2030-12-31",
-      "status": "open",
-      "outcomeNote": "Rozhoduje počet obyvatel k 1. 1. 2031.",
-      "sourceUrl": "https://example.com/sazky/vzorkov-2030",
-      "trackerUrl": "https://example.com/tracker/#sazka-vzorkov-2030",
-      "kicom": {
-        "name": "Kicom",
-        "position": "nejmenší město",
-        "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/kicom.jpg"
+      {
+        "id": "maraton-pod-3-2027",
+        "title": "Maraton pod tři hodiny",
+        "claim": "Tomáš Zkouška uběhne do konce roku 2027 maraton pod tři hodiny.",
+        "deadline": "2027-12-31",
+        "status": "open",
+        "outcome_note": "Platí oficiální čas z cíle libovolného maratonu.",
+        "source_url": "https://example.com/sazky/maraton-pod-3-2027",
+        "tracker_url": "https://example.com/tracker/#sazka-maraton-pod-3-2027",
+        "kicom": {
+          "name": "Kicom",
+          "position": "NE",
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Tomáš Zkouška",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/tomas-zkouska-jpg.jpg"
+          }
+        ],
+        "stake": "Basa nealkoholického piva",
+        "metric": null,
+        "closed_at": null
       },
-      "counterparties": [
-        {
-          "name": "Martin Vzor",
-          "position": "největší město",
-          "avatar": "https://www.aox.cz/kicomtracker/assets/avatars/martin-vzor.jpg"
-        }
-      ],
-      "stake": "Šampaňské nebo pamětní mince",
-      "metric": null,
-      "closedAt": null
-    }
-  ]
+      {
+        "id": "robot-kavarna-2027",
+        "title": "Kavárna jen s robotem",
+        "claim": "Do konce roku 2027 otevře ve Vzorkově kavárna, kde kávu připravuje jen robot.",
+        "deadline": "2027-12-31",
+        "status": "open",
+        "outcome_note": "Stačí jedna veřejně přístupná kavárna.",
+        "source_url": "https://example.com/sazky/robot-kavarna-2027",
+        "tracker_url": "https://example.com/tracker/#sazka-robot-kavarna-2027",
+        "kicom": {
+          "name": "Kicom",
+          "position": "NE",
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Lenka Příkladová",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/lenka-prikladova-jpg.jpg"
+          }
+        ],
+        "stake": "Káva na celý rok",
+        "metric": null,
+        "closed_at": null
+      },
+      {
+        "id": "tramvaj-letiste-2028",
+        "title": "Tramvaj na letiště",
+        "claim": "Vzorkov dokončí tramvajovou trať na letiště do konce roku 2028.",
+        "deadline": "2028-12-31",
+        "status": "open",
+        "outcome_note": "Rozhoduje zahájení pravidelného provozu.",
+        "source_url": "https://example.com/sazky/tramvaj-letiste-2028",
+        "tracker_url": "https://example.com/tracker/#sazka-tramvaj-letiste-2028",
+        "kicom": {
+          "name": "Kicom",
+          "position": "NE",
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Jana Testová",
+            "position": "ANO",
+            "avatar": "/api/v1/data/kicomtracker/avatar/jana-testova-jpg.jpg"
+          }
+        ],
+        "stake": "Večeře pro dva; při Kicomově prohře i s dezertem",
+        "metric": null,
+        "closed_at": null
+      },
+      {
+        "id": "vzorkov-2030",
+        "title": "Budoucnost Vzorkova",
+        "claim": "Do roku 2030 bude Vzorkov buď největším, nebo nejmenším městem kraje.",
+        "deadline": "2030-12-31",
+        "status": "open",
+        "outcome_note": "Rozhoduje počet obyvatel k 1. 1. 2031.",
+        "source_url": "https://example.com/sazky/vzorkov-2030",
+        "tracker_url": "https://example.com/tracker/#sazka-vzorkov-2030",
+        "kicom": {
+          "name": "Kicom",
+          "position": "nejmenší město",
+          "avatar": "/api/v1/data/kicomtracker/avatar/kicom-jpg.jpg"
+        },
+        "counterparties": [
+          {
+            "name": "Martin Vzor",
+            "position": "největší město",
+            "avatar": "/api/v1/data/kicomtracker/avatar/martin-vzor-jpg.jpg"
+          }
+        ],
+        "stake": "Šampaňské nebo pamětní mince",
+        "metric": null,
+        "closed_at": null
+      }
+    ]
+  },
+  "cache_age_secs": 42,
+  "ttl_secs": 600
 }

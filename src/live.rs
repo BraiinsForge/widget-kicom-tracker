@@ -5,8 +5,10 @@ use bmc_wasm_sdk::*;
 use crate::feed::{Bet, Person, date};
 use crate::model::{Rotation, finished, navigate, visible};
 
-const FEED: &str = "https://www.aox.cz/kicomtracker/api/v1/wagers.json";
-const CACHE: &str = "kicom.snapshot.v1";
+const FEED: &str = "https://nexus.braiinsforge.com/api/v1/data/kicomtracker/wagers";
+const CACHE: &str = "kicom.snapshot.v2";
+// A snapshot in the aox.cz feed format, which nothing reads.
+const UNREAD_CACHE: &str = "kicom.snapshot.v1";
 const ACCENT: Color = Color::from_hex(0x6E_E7_B7);
 const INK: Color = Color::from_hex(0x0B_12_18);
 const PANEL: Color = Color::from_hex(0x15_23_2B);
@@ -61,8 +63,8 @@ fn retention() -> i32 {
         .clamp(0, 30)
 }
 
-fn parse_snapshot(body: &[u8], allow_legacy: bool) -> Option<Vec<Bet>> {
-    let (mut bets, _) = crate::feed::parse(body, allow_legacy)?;
+fn parse_snapshot(body: &[u8]) -> Option<Vec<Bet>> {
+    let (mut bets, _) = crate::feed::parse(body)?;
     // Persist retention state only after the entire snapshot has been validated.
     for bet in &mut bets {
         let key = format!("kicom.closed.{}", bet.id);
@@ -86,8 +88,9 @@ fn parse_snapshot(body: &[u8], allow_legacy: bool) -> Option<Vec<Bet>> {
 
 #[unsafe(no_mangle)]
 pub extern "C" fn init() {
+    kv::delete(UNREAD_CACHE);
     if let Some(body) = kv::get(CACHE).filter(|b| b.len() <= 512_000)
-        && let Some(bets) = parse_snapshot(&body, true)
+        && let Some(bets) = parse_snapshot(&body)
     {
         STATE.with_borrow_mut(|s| {
             s.bets = bets;
@@ -107,7 +110,7 @@ pub extern "C" fn init() {
 
 fn on_reply(handle: &PollHandle, response: &FetchResponse) {
     let parsed = if (200..300).contains(&response.status) && response.body().len() <= 512_000 {
-        parse_snapshot(response.body(), false)
+        parse_snapshot(response.body())
     } else {
         None
     };
